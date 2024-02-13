@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Bienvenido</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}
+<h2>Resultado de la Búsqueda</h2>
+{% if correo %}
+    <p>El correo electrónico de {{ username }} es: {{ correo }}</p>
+{% else %}
+    <p>No se encontró ningún correo electrónico para el usuario {{ username }}</p>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block content %}
     <h2>Bienvenido {{ nombre }}</h2>
     <p>Correo: {{ correo }}</p>
-</body>
-</html>
+{% endblock %}
