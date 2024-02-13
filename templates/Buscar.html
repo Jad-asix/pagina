@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block header_title %}
+<h2>Buscar Correo por Nombre de Usuario</h2>
+<form method="post" action="{{ url_for('getmail') }}">
+            <label for="username">Nombre de Usuario:</label>
+            <input type="text" id="username" name="username" required><br>
+            <input type="submit" value="Buscar">
+</form>
+
+
+{% endblock %}
