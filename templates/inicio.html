@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block inicio %}
+<body>
+    <header>
+        
+        <h1>Accede a la pagina para tener mas informacion </h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('registro') }}">Registrarse</a></li>
+                <li><a href="{{ url_for('login') }}">Login </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>¿Qué es Bitcoin?</h2>
+        <p>Bitcoin es una criptomoneda descentralizada y digital. Fue creada en 2009 por una persona o grupo de personas bajo el seudónimo de Satoshi Nakamoto. Utiliza una tecnología llamada blockchain para gestionar y registrar todas las transacciones de manera segura y transparente. Bitcoin se considera un activo digital y una forma de inversión debido a su alta volatilidad y su escasez programada.</p>
+        
+    </section>
+
+   
+    <section>
+        <h2>¿Qué es BlackRock?</h2>
+        <p>BlackRock es una de las mayores empresas de gestión de inversiones del mundo. Fue fundada en 1988 y tiene su sede en Nueva York, Estados Unidos. Ofrece una amplia gama de servicios financieros, incluyendo gestión de activos, asesoramiento financiero y servicios de tecnología financiera. BlackRock es conocida por su influencia en los mercados financieros globales y su enfoque en la inversión sostenible y responsable.</p>
+    </section>
+
+{% endblock %}

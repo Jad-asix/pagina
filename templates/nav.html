@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block navigation %}
+
+<nav>
+    <ul>
+        <li><a href="">Noticias</a></li>
+        <li><a href="{{ url_for('proyectos') }}">Proyectos</a></li>
+        <li><a href="{{ url_for('getmail') }}">Volver a buscar un correo</a></li>
+        <li><a href="{{ url_for('addmail') }}">Volver a añadir un correo</a></li>
+        {% if 'username' in session %}
+            <li><a href="">{{ session['username'] }}</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+        {% endif %}
+    </ul>
+
+    <div>
+        <h1>Bienvenido a nuestra aplicación</h1>
+        <p>En nuestra plataforma, los usuarios tienen acceso a una serie de funcionalidades diseñadas para hacer su experiencia más conveniente y productiva. Al registrarse e iniciar sesión, los usuarios pueden acceder a diversas características, como:</p>
+        <p>Buscar Correos Electrónicos: Los usuarios pueden buscar correos electrónicos asociados a un nombre específico.</p>
+        <p>Añadir Correos Electrónicos: Los usuarios tienen la capacidad de agregar nuevos nombres y sus direcciones de correo electrónico correspondientes a nuestra base de datos.</p>
+        <p>Visualizar Proyectos: Los usuarios pueden acceder a una lista de proyectos disponibles en nuestra plataforma.</p>
+        <p>Cerrar Sesión: Cuando los usuarios han terminado de utilizar la plataforma, tienen la opción de cerrar sesión para proteger su privacidad y seguridad.</p>
+        <p>Acceso Personalizado: Dependiendo de los permisos y roles asignados, los usuarios pueden acceder a funcionalidades adicionales o restringidas dentro de la aplicación.</p>
+        <p>Esperamos que disfrutes utilizando nuestra aplicación y que estas funcionalidades te ayuden a alcanzar tus objetivos de manera eficiente y efectiva. ¡No dudes en explorar y descubrir todo lo que nuestra plataforma tiene para ofrecer!</p>
+    </div>
+</nav>
+
+
+{% endblock %}
