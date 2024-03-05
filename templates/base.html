@@ -7,25 +7,33 @@
     <title>{% block title %}Título predeterminado{% endblock %} - Flaskr</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='add.css') }}">
 </head>
-<body>
+<body> 
+     
+    <header>
+        {% block navigation %}{% endblock %} 
+
+    </header>
+
+    <section>
+        <h1>{% block inicio %}{% endblock %} </h1>
+    </section>
+  
+    <section> 
+
     <header>
         <h1>{% block header_title %}{% endblock %}</h1>
     </header>
+
+    </section>
     
     <section class="content">
         {% block content %}{% endblock %}
     </section>
-    
+
     <footer>
-        <form action="{{ url_for('getmail') }}">
-            <button type="submit">Volver a buscar un correo </button>
-        </form>
-        <form action="{{ url_for('addmail') }}">
-            <button type="submit">Volver a añadir un correo</button>
-        </form>
+        {% block footer %}{% endblock %}
     </footer>
     
-
-
+ 
 </body>
 </html>

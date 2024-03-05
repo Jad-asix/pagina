@@ -11,7 +11,7 @@ conn = mysql.connector.connect(
 # Creamos un cursor para ejecutar comandos SQL
 cursor = conn.cursor()
 
-#CONSTANTES para los resultados de las funciones
+# CONSTANTES para los resultados de las funciones
 NOTROBAT = "NOTROBAT"
 AFEGIT = "AFEGIT"
 MODIFICAT = "MODIFICAT"
@@ -20,11 +20,15 @@ JAEXISTEIX = "JAEXISTEIX"
 # Función getmaildb que recibe el nombre como parámetro y retorna el email
 # Si no lo encuentra, retorna el string "NOTROBAT"
 def getmaildb(nombre):
-    c.execute("SELECT email FROM usuarios WHERE nombre=?", (nombre,))
-    result = c.fetchone()
-    if result:
-        return result[0]
-    return NOTROBAT
+    try:
+        cursor.execute("SELECT email FROM usuarios WHERE nombre=%s", (nombre,))
+        result = cursor.fetchone()
+        if result:
+            return result[0]
+        return NOTROBAT
+    except mysql.connector.Error as err:
+        print("Error de base de datos:", err)
+        return None
 
 # Función addmaildb que recibe el nombre y el email como parámetros, y los agrega a la base de datos
 # Si ya existe, retorna el string "JAEXISTEIX"
@@ -33,13 +37,21 @@ def getmaildb(nombre):
 def addmaildb(nombre, email, modif=False):
     old_email = getmaildb(nombre)
     if old_email == NOTROBAT:
-        c.execute("INSERT INTO usuarios VALUES (?, ?)", (nombre, email))
-        conn.commit()
-        return AFEGIT
+        try:
+            cursor.execute("INSERT INTO usuarios (nombre, email) VALUES (%s, %s)", (nombre, email))
+            conn.commit()
+            return AFEGIT
+        except mysql.connector.Error as err:
+            print("Error de base de datos:", err)
+            return None
     elif (old_email != email and modif):
-        c.execute("UPDATE usuarios SET email=? WHERE nombre=?", (email, nombre))
-        conn.commit()
-        return MODIFICAT
+        try:
+            cursor.execute("UPDATE usuarios SET email=%s WHERE nombre=%s", (email, nombre))
+            conn.commit()
+            return MODIFICAT
+        except mysql.connector.Error as err:
+            print("Error de base de datos:", err)
+            return None
     return JAEXISTEIX
 
 # Ejemplo de uso:
@@ -49,5 +61,6 @@ print(addmaildb("Carlos", "carlos@example.com"))
 print(getmaildb("Mercedes"))
 print(getmaildb("Carlos"))
 
-# Cerramos la conexión a la base de datos al finalizar
+# Cerramos el cursor y la conexión a la base de datos al finalizar
+cursor.close()
 conn.close()
